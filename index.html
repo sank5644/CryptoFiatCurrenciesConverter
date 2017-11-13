@@ -12,25 +12,21 @@
   </head>
   <body bgcolor = "black">
     <div id="mainContainer">
-      <div id="calculatorContainer">
-           <b class="ToolTitle">ICO Tokens Calculator</b>
+      <div id="converterContainer">
+           <b class="ToolTitle2">Crypto & Fiat ToCurrency Converter</b>
            <img src="https://media.licdn.com/mpr/mpr/shrink_200_200/AAIA_wDGAAAAAQAAAAAAAA1-AAAAJGRlOGYzMGIyLWNmMjEtNDcyYS1iNjgwLWFjOTk1NTg0Y2MxZQ.png" alt="CSGO Howl" style="float:right; margin-top:0px; height:60; width:60;" >
 
-          <select id="icos">
+          <select id="FromCurrency">
             <option>Loading...</option>
           </select>
 
-          <select id="currencies">
-            <option>Select Currency</option>
-          </select>
-
-          <select id="rounds">
-            <option>Select Tokensale Round</option>
+          <select id="ToCurrency">
+            <option>Loading...</option>
           </select>
 
           <input type="number" id="investmentAmount" placeholder="Enter Investment Amount" step='0.01' min="0">
 
-          <button id="startTokenCalc">Calculate My Tokens</button>
+          <button id="startTokenCalc">Convert</button>
 
           <input type="text" id="tokensresult" placeholder=" 0 Tokens" readonly>  
       </div>

@@ -1,4 +1,4 @@
-#investmentamount, #icos, #currencies, #rounds  {
+#investmentamount, #FromCurrency, #ToCurrency, #rounds  {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -61,7 +61,7 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #45a049;
 }
 
-#calculatorContainer {
+#converterContainer {
     border-radius: 5px;
     background-color: white;
     padding: 20px;
@@ -70,24 +70,24 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 30%;
 } 
 
-.ToolTitle {
+.ToolTitle2 {
   float:left; 
   margin-top:20px;
 }
 
-#icos, #currencies, #rounds {
+#FromCurrency, #ToCurrency, #rounds {
   cursor: pointer;
 }
 
 @media only screen and (max-width: 360px) {
- #calculatorContainer {
+ #converterContainer {
      width: 90%;
      margin-left: 0;
  }
 }
 
 @media only screen and (max-width : 800px) {
- #calculatorContainer {
+ #converterContainer {
      width: 75%;
      margin: 0 auto;
  }
