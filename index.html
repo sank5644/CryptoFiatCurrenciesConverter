@@ -10,26 +10,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
     <script src='index.min.js'></script>
   </head>
-  <body bgcolor = "black">
+  <body bgcolor = "white">
     <div id="mainContainer">
       <div id="converterContainer">
-           <b class="ToolTitle2">Crypto & Fiat ToCurrency Converter</b>
-           <img src="https://media.licdn.com/mpr/mpr/shrink_200_200/AAIA_wDGAAAAAQAAAAAAAA1-AAAAJGRlOGYzMGIyLWNmMjEtNDcyYS1iNjgwLWFjOTk1NTg0Y2MxZQ.png" alt="CSGO Howl" style="float:right; margin-top:0px; height:60; width:60;" >
-
+          <b class="ToolTitle2">Crypto & Fiat Currencies Converter</b>
+          
           <select id="FromCurrency">
             <option>Loading...</option>
           </select>
-          <input id= "FromShowCryptosOnly" type="checkbox" name="sports" value="Only Cryptos"  />
-          <input id= "FromShowFiatOnly" type="checkbox" name="sports" value="Only Fiat"  />
+          <div class="Boxes">
+            <label>Cryptos</label>
+            <input type="checkbox" id= "fromcryptos" checked>         
+
+            <label>Fiats</label>
+            <input type="checkbox" id= "fromfiat" checked>
+          </div>          
 
           <select id="ToCurrency">
             <option>Loading...</option>
           </select>
-          <input id= "FromShowCryptosOnly" type="checkbox" name="sports" value="Only Cryptos"  />
-          <input id= "FromShowFiatOnly" type="checkbox" name="sports" value="Only Fiat"  />
+          <div class="Boxes">
+            <label>Cryptos</label>
+            <input type="checkbox" id= "tocryptos" checked>         
 
-
-          <input type="number" id="investmentAmount" placeholder="Enter Investment Amount" step='0.01' min="0">
+            <label>Fiats</label>
+            <input type="checkbox" id= "tofiat" checked>
+          </div>  
+          
+          <input type="number" id="investmentAmount" placeholder="Enter Amount" step='0.01' min="0">
 
           <button id="startTokenCalc">Convert</button>
 
