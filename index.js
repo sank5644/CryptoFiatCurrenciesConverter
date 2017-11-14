@@ -5,6 +5,13 @@ $(document).ready(() => {
     const currencies = [
       'USD ($)', 'CAD ($)', 'EUR (€)', 'CNY (¥)', 'KRW (₩)', 'GBP (£)', 'JPY (¥)'
     ];
+
+    currencies.sort(function (a, b) {
+      return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
+
+    currencies.reverse();
+
     let cryptoData = []
     let fromHasCrypto = true;
     let fromHasFiat = true;
@@ -13,30 +20,76 @@ $(document).ready(() => {
     
     /*Function that will populate currencies*/
     function populateCurrencies(cryptoData) {
-      element.innerHTML = null;
-
+      ui.fromCurrency.innerHTML = null;
+      ui.toCurrency.innerHTML = null;
+          debugger;
+      //Getting list of cryptoCoinNames
       var cryptoCoinNames = [];
 
-      currencies.sort(function (a, b) {
+      cryptoData.forEach(function(crypto) {
+        var cryptoDisplayName = crypto.name + " (" + crypto.symbol + ")";
+        cryptoCoinNames.push(cryptoDisplayName);
+      });
+
+      cryptoCoinNames.sort(function (a, b) {
         return a.toLowerCase().localeCompare(b.toLowerCase());
       });
+  
+      cryptoCoinNames.reverse();
+
+      //adding crypto to both boxes if necessary
+      if (fromHasCrypto)
+      {
+        cryptoCoinNames.forEach(function(cryptoname) {
+          const fromcryptocurrency = document.createElement('option');
+          fromcryptocurrency.text = fromcryptocurrency.value = cryptoname;
+          ui.fromCurrency.add(fromcryptocurrency, 0);
+        });
+      }
+
+      if (toHasCrypto)
+      {
+        cryptoCoinNames.forEach(function(cryptoname) {
+          const tocryptocurrency = document.createElement('option');
+          tocryptocurrency.text = tocryptocurrency.value = cryptoname;
+          ui.toCurrency.add(tocryptocurrency, 0);
+        });
+      }
+
+      //adding fiat to both boxes if necessary
+      if (fromHasFiat)
+      {
+        currencies.forEach(function(currency) {
+          const fromfiatcurrency = document.createElement('option');
+          fromfiatcurrency.text = fromfiatcurrency.value = currency;
+          ui.fromCurrency.add(fromfiatcurrency, 0);
+        });
+      }
+
+      if (toHasFiat)
+      {
+        currencies.forEach(function(currency) {
+          const tofiatcurrency = document.createElement('option');
+          tofiatcurrency.text = tofiatcurrency.value = currency;
+          ui.toCurrency.add(tofiatcurrency, 0);
+        });
+      }
       
-      currencies.reverse();
+      //adding default selected options
+      const selectFromCurrencyOption = document.createElement('option');
+      selectFromCurrencyOption.text = selectFromCurrencyOption.value = 'Select Start Currency';
+      ui.fromCurrency.add(selectFromCurrencyOption, 0);
+
+      const selectToCurrencyOption = document.createElement('option');
+      selectToCurrencyOption.text = selectToCurrencyOption.value = 'Select Start Currency';
+      ui.toCurrency.add(selectToCurrencyOption, 0);
       
-      currencies.forEach(function(currency) {
-          const currency = document.createElement('option');
-          currency.text = currency.value = currency;
-          element.add(icoToAdd, 0);
-      });
-      
-      const selectICOoption = document.createElement('option');
-      selectICOoption.text = selectICOoption.value = 'Select ICO';
-      ui.icosBox.add(selectICOoption, 0);
-      
-      ui.icosBox.selectedIndex = "0";
+      ui.fromCurrency.selectedIndex = "0";
+      ui.toCurrency.selectedIndex = "0";
     }
 
     function RefreshCryptoCoins() {
+      debugger;
       return fetch(api.tokenCoinmarketCapPrefix)
         .then(resp => resp.json())
         .then(data => {
@@ -92,19 +145,17 @@ $(document).ready(() => {
       }
     }
     
-    
-    populateStaticLists()
     RefreshCryptoCoins()
 
     ui.calculateButton.addEventListener('click', onCalculateClick)
-    ui.fromCryptoCheckboxChanges.addEventListener('change', onfromCryptoSelectionChange)
-    ui.fromFiatCheckboxChanges.addEventListener('change', onfromFiatSelectionChange)
-    ui.toCryptoCheckboxChanges.addEventListener('change', ontoCryptoSelectionChange)
-    ui.toFiatCheckboxChanges.addEventListener('change', ontoFiatSelectionChange)
+    //ui.fromCryptoCheckboxChanges.addEventListener('change', onfromCryptoSelectionChange)
+    //ui.fromFiatCheckboxChanges.addEventListener('change', onfromFiatSelectionChange)
+    //ui.toCryptoCheckboxChanges.addEventListener('change', ontoCryptoSelectionChange)
+    //ui.toFiatCheckboxChanges.addEventListener('change', ontoFiatSelectionChange)
     
   })({
     api: {
-      tokenCoinmarketCapPrefix: 'https://api.coinmarketcap.com/v1/ticker/',
+      tokenCoinmarketCapPrefix: 'https://api.coinmarketcap.com/v1/ticker/?limit=10000000',
       googleICOSheet: 'https://spreadsheets.google.com/feeds/list/1y_Rg6i0Yu_uqJ8EqPbwWqlA75f-w84aH3nJ_QiKrbsQ/1/public/values?alt=json-in-script&callback=cb'
     },
     ui: {
